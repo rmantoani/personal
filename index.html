@@ -43,12 +43,13 @@
             border-bottom-color: #E6A4B4;
             font-weight: 600;
         }
-        /* Fallback style for image if it fails to load */
-        .image-fallback-placeholder {
+        /* Style for the emoji/text visual representation */
+        .exercise-visual-representation {
             background-color: #FAD4D4; /* Light peach background */
             color: #B47B84; /* Text color matching heading */
-            height: 192px; /* Same height as previous images (h-48 in Tailwind) */
+            height: 192px; /* Same height as previous image placeholders */
             display: flex;
+            flex-direction: column; /* To stack emoji and text */
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -58,6 +59,10 @@
             margin-bottom: 1rem;
             padding: 1rem;
             line-height: 1.3;
+        }
+        .exercise-visual-representation .emoji {
+            font-size: 4rem; /* Larger emoji size */
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -124,21 +129,21 @@
         document.addEventListener('DOMContentLoaded', function () {
             const exercisesData = {
                 aquecimento: [
-                    { name: 'Caminhada até a Academia', howTo: 'Inicie com uma caminhada em ritmo confortável até a academia.', benefits: 'Aumenta gradualmente a frequência cardíaca, prepara os músculos e melhora a circulação.', imageText: 'Caminhada até a Academia' },
-                    { name: 'Caminhada Leve na Esteira', howTo: 'Caminhe na esteira por 3-5 minutos em um ritmo que permita conversar confortavelmente.', benefits: 'Aquecimento geral do corpo e prepara o sistema cardiovascular para o treino.', imageText: 'Caminhada na Esteira' }
+                    { name: 'Caminhada até a Academia', howTo: 'Inicie com uma caminhada em ritmo confortável até a academia.', benefits: 'Aumenta gradualmente a frequência cardíaca, prepara os músculos e melhora a circulação.', visual: '🚶‍♀️' },
+                    { name: 'Caminhada Leve na Esteira', howTo: 'Caminhe na esteira por 3-5 minutos em um ritmo que permita conversar confortavelmente.', benefits: 'Aquecimento geral do corpo e prepara o sistema cardiovascular para o treino.', visual: '🏃‍♀️' }
                 ],
                 'treino-forca': [
-                    { name: 'Leg Press', howTo: 'Sente-se, posicione os pés na plataforma na largura dos ombros. Empurre estendendo as pernas, sem travar os joelhos. Retorne controladamente.', benefits: 'Fortalece coxas e glúteos, essenciais para sustentar o peso adicional e para o parto.', imageText: 'Leg Press' },
-                    { name: 'Cadeira Adutora', howTo: 'Sente-se com as pernas abertas contra os apoios. Junte as pernas contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte interna da coxa, importante para a estabilidade pélvica e circulação.', imageText: 'Cadeira Adutora' },
-                    { name: 'Cadeira Abdutora', howTo: 'Sente-se com as pernas fechadas contra os apoios. Empurre as pernas para fora contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte externa da coxa e glúteos, ajudando na postura e aliviando dores lombares.', imageText: 'Cadeira Abdutora' },
-                    { name: 'Puxada Alta (Lat Pulldown)', howTo: 'Sente-se, segure a barra com as mãos abertas. Puxe a barra em direção ao peito, contraindo as costas. Retorne lentamente.', benefits: 'Fortalece as costas, crucial para manter uma boa postura e prevenir dores.', imageText: 'Puxada Alta' },
-                    { name: 'Peck Deck (Peito)', howTo: 'Sente-se com as costas apoiadas. Posicione os antebraços nos apoios e empurre para frente, aproximando-os. Retorne lentamente.', benefits: 'Fortalece o peito, ajudando na postura e reduzindo a sobrecarga nos ombros.', imageText: 'Peck Deck (Peito)' },
-                    { name: 'Rosca Direta com Halteres', howTo: 'Sentada ou em pé, segure um haltere em cada mão. Flexione os cotovelos, levantando os pesos em direção aos ombros. Controle a descida.', benefits: 'Fortalece os bíceps, músculos importantes para carregar o bebê e para o dia a dia.', imageText: 'Rosca Direta com Halteres' }
+                    { name: 'Leg Press', howTo: 'Sente-se, posicione os pés na plataforma na largura dos ombros. Empurre estendendo as pernas, sem travar os joelhos. Retorne controladamente.', benefits: 'Fortalece coxas e glúteos, essenciais para sustentar o peso adicional e para o parto.', visual: '🦵' },
+                    { name: 'Cadeira Adutora', howTo: 'Sente-se com as pernas abertas contra os apoios. Junte as pernas contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte interna da coxa, importante para a estabilidade pélvica e circulação.', visual: '🦵' },
+                    { name: 'Cadeira Abdutora', howTo: 'Sente-se com as pernas fechadas contra os apoios. Empurre as pernas para fora contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte externa da coxa e glúteos, ajudando na postura e aliviando dores lombares.', visual: '🦵' },
+                    { name: 'Puxada Alta (Lat Pulldown)', howTo: 'Sente-se, segure a barra com as mãos abertas. Puxe a barra em direção ao peito, contraindo as costas. Retorne lentamente.', benefits: 'Fortalece as costas, crucial para manter uma boa postura e prevenir dores.', visual: '💪' },
+                    { name: 'Peck Deck (Peito)', howTo: 'Sente-se com as costas apoiadas. Posicione os antebraços nos apoios e empurre para frente, aproximando-os. Retorne lentamente.', benefits: 'Fortalece o peito, ajudando na postura e reduzindo a sobrecarga nos ombros.', visual: '👐' },
+                    { name: 'Rosca Direta com Halteres', howTo: 'Sentada ou em pé, segure um haltere em cada mão. Flexione os cotovelos, levantando os pesos em direção aos ombros. Controle a descida.', benefits: 'Fortalece os bíceps, músculos importantes para carregar o bebê e para o dia a dia.', visual: '🏋️‍♀️' }
                 ],
                 'volta-calma': [
-                    { name: 'Alongamento Gato-Camelo', howTo: 'Em quatro apoios, inspire arqueando a coluna para baixo e expire arredondando para cima. Repita 5-8 vezes.', benefits: 'Melhora a mobilidade da coluna e da pelve, preparando o corpo para o parto.', imageText: 'Alongamento Gato-Camelo' },
-                    { name: 'Alongamento Borboleta', howTo: 'Sentada, junte as solas dos pés e deixe os joelhos caírem para os lados. Mantenha por 30 segundos.', benefits: 'Alivia a tensão no quadril e melhora a flexibilidade da região pélvica.', imageText: 'Alongamento Borboleta' },
-                    { name: 'Alongamento de Panturrilhas', howTo: 'Em pé, apoie as mãos na parede. Leve uma perna para trás, mantendo o calcanhar no chão. Mantenha por 30s de cada lado.', benefits: 'Alivia a tensão e ajuda a reduzir o inchaço nas pernas e pés.', imageText: 'Alongamento de Panturrilhas' }
+                    { name: 'Alongamento Gato-Camelo', howTo: 'Em quatro apoios, inspire arqueando a coluna para baixo e expire arredondando para cima. Repita 5-8 vezes.', benefits: 'Melhora a mobilidade da coluna e da pelve, preparando o corpo para o parto.', visual: '🧘‍♀️' },
+                    { name: 'Alongamento Borboleta', howTo: 'Sentada, junte as solas dos pés e deixe os joelhos caírem para os lados. Mantenha por 30 segundos.', benefits: 'Alivia a tensão no quadril e melhora a flexibilidade da região pélvica.', visual: '🦋' },
+                    { name: 'Alongamento de Panturrilhas', howTo: 'Em pé, apoie as mãos na parede. Leve uma perna para trás, mantendo o calcanhar no chão. Mantenha por 30s de cada lado.', benefits: 'Alivia a tensão e ajuda a reduzir o inchaço nas pernas e pés.', visual: '🤸‍♀️' }
                 ]
             };
 
@@ -182,16 +187,10 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <img src="https://via.placeholder.com/600x300/F3D7CA/5C4033?text=${encodeURIComponent(exercise.imageText.replace(/ /g, '+'))}" 
-                             alt="${exercise.imageText}" 
-                             class="rounded-lg w-full object-cover h-48 mb-4"
-                             onerror="
-                                 this.onerror=null; // Prevent infinite loop if fallback fails
-                                 const fallbackDiv = document.createElement('div');
-                                 fallbackDiv.className = 'image-fallback-placeholder';
-                                 fallbackDiv.textContent = this.alt;
-                                 this.parentNode.replaceChild(fallbackDiv, this);
-                             ">
+                        <div class="exercise-visual-representation">
+                            <span class="emoji">${exercise.visual}</span>
+                            <span>${exercise.name}</span>
+                        </div>
                         <div class="border-b border-gray-200 mb-2">
                             <nav class="-mb-px flex space-x-4" aria-label="Tabs">
                                 <button class="tab-button active whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm text-gray-600" data-tab="howTo">Como Fazer</button>
