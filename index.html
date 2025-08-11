@@ -43,6 +43,22 @@
             border-bottom-color: #E6A4B4;
             font-weight: 600;
         }
+        /* New style for the text placeholder instead of image */
+        .image-placeholder {
+            background-color: #FAD4D4; /* Light peach background */
+            color: #B47B84; /* Text color matching heading */
+            height: 192px; /* Same height as previous images (h-48 in Tailwind) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 0.5rem; /* rounded-lg in Tailwind */
+            margin-bottom: 1rem; /* mb-4 in Tailwind */
+            padding: 1rem;
+            line-height: 1.3;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -108,21 +124,21 @@
         document.addEventListener('DOMContentLoaded', function () {
             const exercisesData = {
                 aquecimento: [
-                    { name: 'Caminhada até a Academia', howTo: 'Inicie com uma caminhada em ritmo confortável até a academia.', benefits: 'Aumenta gradualmente a frequência cardíaca, prepara os músculos e melhora a circulação.', imageText: 'mulher+grávida+caminhando+rua' },
-                    { name: 'Caminhada Leve na Esteira', howTo: 'Caminhe na esteira por 3-5 minutos em um ritmo que permita conversar confortavelmente.', benefits: 'Aquecimento geral do corpo e prepara o sistema cardiovascular para o treino.', imageText: 'mulher+grávida+na+esteira+academia' }
+                    { name: 'Caminhada até a Academia', howTo: 'Inicie com uma caminhada em ritmo confortável até a academia.', benefits: 'Aumenta gradualmente a frequência cardíaca, prepara os músculos e melhora a circulação.', imageText: 'Caminhada até a Academia' },
+                    { name: 'Caminhada Leve na Esteira', howTo: 'Caminhe na esteira por 3-5 minutos em um ritmo que permita conversar confortavelmente.', benefits: 'Aquecimento geral do corpo e prepara o sistema cardiovascular para o treino.', imageText: 'Caminhada na Esteira' }
                 ],
                 'treino-forca': [
-                    { name: 'Leg Press', howTo: 'Sente-se, posicione os pés na plataforma na largura dos ombros. Empurre estendendo as pernas, sem travar os joelhos. Retorne controladamente.', benefits: 'Fortalece coxas e glúteos, essenciais para sustentar o peso adicional e para o parto.', imageText: 'mulher+grávida+fazendo+leg+press' },
-                    { name: 'Cadeira Adutora', howTo: 'Sente-se com as pernas abertas contra os apoios. Junte as pernas contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte interna da coxa, importante para a estabilidade pélvica e circulação.', imageText: 'mulher+grávida+fazendo+cadeira+adutora' },
-                    { name: 'Cadeira Abdutora', howTo: 'Sente-se com as pernas fechadas contra os apoios. Empurre as pernas para fora contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte externa da coxa e glúteos, ajudando na postura e aliviando dores lombares.', imageText: 'mulher+grávida+fazendo+cadeira+abdutora' },
-                    { name: 'Puxada Alta (Lat Pulldown)', howTo: 'Sente-se, segure a barra com as mãos abertas. Puxe a barra em direção ao peito, contraindo as costas. Retorne lentamente.', benefits: 'Fortalece as costas, crucial para manter uma boa postura e prevenir dores.', imageText: 'mulher+grávida+fazendo+puxada+alta' },
-                    { name: 'Peck Deck (Peito)', howTo: 'Sente-se com as costas apoiadas. Posicione os antebraços nos apoios e empurre para frente, aproximando-os. Retorne lentamente.', benefits: 'Fortalece o peito, ajudando na postura e reduzindo a sobrecarga nos ombros.', imageText: 'mulher+grávida+fazendo+peck+deck' },
-                    { name: 'Rosca Direta com Halteres', howTo: 'Sentada ou em pé, segure um haltere em cada mão. Flexione os cotovelos, levantando os pesos em direção aos ombros. Controle a descida.', benefits: 'Fortalece os bíceps, músculos importantes para carregar o bebê e para o dia a dia.', imageText: 'mulher+grávida+fazendo+rosca+direta+halteres' }
+                    { name: 'Leg Press', howTo: 'Sente-se, posicione os pés na plataforma na largura dos ombros. Empurre estendendo as pernas, sem travar os joelhos. Retorne controladamente.', benefits: 'Fortalece coxas e glúteos, essenciais para sustentar o peso adicional e para o parto.', imageText: 'Leg Press' },
+                    { name: 'Cadeira Adutora', howTo: 'Sente-se com as pernas abertas contra os apoios. Junte as pernas contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte interna da coxa, importante para a estabilidade pélvica e circulação.', imageText: 'Cadeira Adutora' },
+                    { name: 'Cadeira Abdutora', howTo: 'Sente-se com as pernas fechadas contra os apoios. Empurre as pernas para fora contra a resistência, controlando o movimento de volta.', benefits: 'Fortalece a parte externa da coxa e glúteos, ajudando na postura e aliviando dores lombares.', imageText: 'Cadeira Abdutora' },
+                    { name: 'Puxada Alta (Lat Pulldown)', howTo: 'Sente-se, segure a barra com as mãos abertas. Puxe a barra em direção ao peito, contraindo as costas. Retorne lentamente.', benefits: 'Fortalece as costas, crucial para manter uma boa postura e prevenir dores.', imageText: 'Puxada Alta' },
+                    { name: 'Peck Deck (Peito)', howTo: 'Sente-se com as costas apoiadas. Posicione os antebraços nos apoios e empurre para frente, aproximando-os. Retorne lentamente.', benefits: 'Fortalece o peito, ajudando na postura e reduzindo a sobrecarga nos ombros.', imageText: 'Peck Deck (Peito)' },
+                    { name: 'Rosca Direta com Halteres', howTo: 'Sentada ou em pé, segure um haltere em cada mão. Flexione os cotovelos, levantando os pesos em direção aos ombros. Controle a descida.', benefits: 'Fortalece os bíceps, músculos importantes para carregar o bebê e para o dia a dia.', imageText: 'Rosca Direta com Halteres' }
                 ],
                 'volta-calma': [
-                    { name: 'Alongamento Gato-Camelo', howTo: 'Em quatro apoios, inspire arqueando a coluna para baixo e expire arredondando para cima. Repita 5-8 vezes.', benefits: 'Melhora a mobilidade da coluna e da pelve, preparando o corpo para o parto.', imageText: 'mulher+grávida+fazendo+alongamento+gato+camelo' },
-                    { name: 'Alongamento Borboleta', howTo: 'Sentada, junte as solas dos pés e deixe os joelhos caírem para os lados. Mantenha por 30 segundos.', benefits: 'Alivia a tensão no quadril e melhora a flexibilidade da região pélvica.', imageText: 'mulher+grávida+fazendo+alongamento+borboleta' },
-                    { name: 'Alongamento de Panturrilhas', howTo: 'Em pé, apoie as mãos na parede. Leve uma perna para trás, mantendo o calcanhar no chão. Mantenha por 30s de cada lado.', benefits: 'Alivia a tensão e ajuda a reduzir o inchaço nas pernas e pés.', imageText: 'mulher+grávida+alongando+panturrilha' }
+                    { name: 'Alongamento Gato-Camelo', howTo: 'Em quatro apoios, inspire arqueando a coluna para baixo e expire arredondando para cima. Repita 5-8 vezes.', benefits: 'Melhora a mobilidade da coluna e da pelve, preparando o corpo para o parto.', imageText: 'Alongamento Gato-Camelo' },
+                    { name: 'Alongamento Borboleta', howTo: 'Sentada, junte as solas dos pés e deixe os joelhos caírem para os lados. Mantenha por 30 segundos.', benefits: 'Alivia a tensão no quadril e melhora a flexibilidade da região pélvica.', imageText: 'Alongamento Borboleta' },
+                    { name: 'Alongamento de Panturrilhas', howTo: 'Em pé, apoie as mãos na parede. Leve uma perna para trás, mantendo o calcanhar no chão. Mantenha por 30s de cada lado.', benefits: 'Alivia a tensão e ajuda a reduzir o inchaço nas pernas e pés.', imageText: 'Alongamento de Panturrilhas' }
                 ]
             };
 
@@ -166,10 +182,7 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <img src="https://placehold.co/600x300/F3D7CA/5C4033?text=${exercise.imageText.replace(/ /g, '+')}" 
-                             alt="Ilustração do exercício ${exercise.name}" 
-                             class="rounded-lg w-full object-cover h-48 mb-4"
-                             onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='; this.style.backgroundColor='#FAD4D4'; this.alt='Imagem indisponível.';">
+                        <div class="image-placeholder">${exercise.imageText}</div>
                         <div class="border-b border-gray-200 mb-2">
                             <nav class="-mb-px flex space-x-4" aria-label="Tabs">
                                 <button class="tab-button active whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm text-gray-600" data-tab="howTo">Como Fazer</button>
